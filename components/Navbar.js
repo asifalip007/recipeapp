@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 function Navbar() {
     return (
         <nav className='uk-navbar-container uk-padding-small' uk-navbar='true'>
@@ -6,9 +8,9 @@ function Navbar() {
             </div>
             <div className='uk-navbar-right'>
                 <ul className='uk-navbar-nav'>
-                    <li><a href='localhost:3000/' style={{minHeight:'0'}}>Home</a></li>
-                    <li><a href='#' style={{minHeight:'0'}}>Sign In</a></li>
-                    <li><a href='#' style={{minHeight:'0'}}>Sign Up</a></li>
+                    <li><Link href="/"><a style={{minHeight:'0'}}>Home</a></Link></li>
+                    <li><Link href="/login"><a style={{minHeight:'0'}}>Sign In</a></Link></li>
+                    <li><Link href="/create"><a style={{minHeight:'0'}}>Sign Up</a></Link></li>
                 </ul>
             </div>
         </nav>

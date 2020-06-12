@@ -12,6 +12,11 @@ function Layout(props) {
             </Head>
             <Navbar />
             {props.children}
+            <style jsx global>{`
+                :root{
+                    font-size: 12px;
+                }
+            `}</style>
         </div>
     )
 }
