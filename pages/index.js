@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import Link from 'next/link';
+import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 
 import Layout from '../components/Layout';
 import CardTemplate from '../components/CardTemplate';
@@ -7,25 +9,29 @@ import Data from '../Data/data.json';
 import NoRecipe from '../components/NoRecipe';
 
 
-class Index extends Component {
-  state = {
-    data: [],
+
+export async function getServerSideProps () {
+  let data;
+  await axios.get("http://localhost:5000/recipes/").then(res => data = res.data);
+  return {
+    props:{
+      recipes: data
+    }
   }
+}
+
+class Index extends Component {
   componentDidMount() {
-    const data = Data.map((data) => { return data });
-    if (data.length !== 0) {
+    if (this.props.recipes.length !== 0) {
       document.getElementById('noRecipe').style.display = 'none';
       document.getElementById('recipeList').style.display = 'block';
     } else {
       document.getElementById('noRecipe').style.display = 'block';
       document.getElementById('recipeList').style.display = 'none';
     }
-    this.setState({
-      data: data
-    })
   }
   render() {
-    const cards = this.state.data.map((item) => { return <CardTemplate card={item} /> })
+    console.log(this.props.recipes)
     return (
       <Layout>
         <div className='uk-padding uk-container uk-text-center'>
@@ -38,12 +44,15 @@ class Index extends Component {
         <NoRecipe />
         <div id='recipeList' >
           <div className='uk-grid-medium uk-child-width-1-3@s uk-padding' uk-grid='true'>
-            {cards}
+            {this.props.recipes.map(recipe => {
+              return <CardTemplate card={recipe} />
+            })}
           </div>
         </div>
       </Layout>
     )
   }
 }
+
 
 export default Index;

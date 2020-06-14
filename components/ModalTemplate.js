@@ -1,10 +1,10 @@
 function ModalTemplate(props) {
     return (
-        <div id={props.card.id} uk-modal='true'>
+        <div id={`_${props.card._id}`} uk-modal='true'>
             <div className='uk-modal-dialog uk-modal-body uk-padding-remove uk-margin-auto-vertical uk-width-2-3' >
                 <button className='uk-modal-close-default' uk-close="true"></button>
                 <div style={{maxHeight:'300px', overflow:'hidden'}}>
-                    <img className='uk-width-1-1' src={props.card.image} alt='sandwich' />
+                    <img className='uk-width-1-1' src='/sandwich.jpeg' alt='sandwich' />
                 </div>
                 <div className='uk-padding-small'>
                     <h1 style={{ marginBottom: '10px' }}><strong>{props.card.foodname}</strong></h1>
@@ -15,7 +15,7 @@ function ModalTemplate(props) {
                         </div>
                         <div className='uk-flex  uk-align-middle' style={{ marginTop: '0px' }}>
                             <img src='/chefs-hat.svg' alt='user' style={{ width: "10px", height: "auto" }} />
-                            <p className="uk-margin-remove" style={{ paddingLeft: '5px' }}>{props.card.user}</p>
+                            <p className="uk-margin-remove" style={{ paddingLeft: '5px' }}>{props.card.name}</p>
                         </div>
                     </div>
                     <div>

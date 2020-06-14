@@ -1,8 +1,25 @@
-import Layout from '../components/Layout';
-import Accordion from '../components/AccordionTemplate';
-import Addform from '../components/AddForm';
+import Layout from '../../components/Layout';
+import Accordion from '../../components/AccordionTemplate';
+import Addform from '../../components/AddForm';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
-function Profile() {
+export async function getServerSideProps(context) {
+    let rdata, udata;
+    await axios.get('http://localhost:5000/recipes/').then(res => rdata = res.data);
+    await axios.get('http://localhost:5000/users/').then(res => udata = res.data);
+    return {
+        props: {
+            userData: udata,
+            recipeData: rdata
+        }
+    }
+}
+
+function Profile(props) {
+    const urlPara = useRouter().query;
+    const userData = props.userData.filter(item => item.username === urlPara['username'])
+    const recipeData = props.recipeData.filter(item => item.username === urlPara['username'])
     return (
         <Layout>
             <div className='uk-padding uk-width-2-3' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
@@ -11,9 +28,9 @@ function Profile() {
                         <img id='userprofile' className='uk-border-circle' src='/user.png' style={{ width: '150px', height: '150px', border: '1px solid #e5e5e5', padding: '2px' }} />
                     </div>
                     <div style={{ position: 'absolute', left: "120px", top: '50px' }}>
-                        <h1>Hi, Asif</h1>
+                        <h1>Hi,{userData[0].name}</h1>
                         <p className='uk-margin-remove'>Add More Recipes Into Your Fabulous List</p>
-                        <p className='uk-margin-remove'>Recipes Added: 0</p>
+                        <p className='uk-margin-remove'>Recipes Added: {recipeData.length}</p>
                     </div>
                 </div>
                 <div>
@@ -30,13 +47,15 @@ function Profile() {
                         <li>
                             <div >
                                 <ul style={{ margin: '0px' }} uk-accordion='true'>
-                                    <Accordion />
+                                    {recipeData.map(item => {
+                                        return <Accordion data={item} />
+                                    })}
                                 </ul>
                             </div>
                         </li>
                         <li>
                             <div className='uk-container uk-width-4-5'>
-                                <Addform />
+                                <Addform data={userData} />
                             </div>
                         </li>
                     </ul>
