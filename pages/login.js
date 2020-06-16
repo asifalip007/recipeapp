@@ -4,10 +4,10 @@ import axios from 'axios';
 
 export async function getServerSideProps(context){
     let data;
-    await axios.get('http://localhost:5000/users/').then(res => data = res.data);
+    await axios.get('http://localhost:3000/api/users').then(res => data = res.data);
     return {
         props: {
-            userData: data
+            userData: data.data
         }
     }
 }

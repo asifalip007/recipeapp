@@ -33,7 +33,7 @@ class SignUp extends Component {
                 username: this.state.username,
                 password: hashedPassword
             }
-            axios.post('http://localhost:5000/users/add/', formData)
+            axios.post('http://localhost:3000/api/users/add', formData)
                 .then(res => {
                     console.log(res.data)
                     this.setState({
@@ -65,11 +65,11 @@ class SignUp extends Component {
                         <input id='password' className='uk-width-expand' type='password' defaultValue={this.state.password} onChange={this.onChange} style={{ fontSize: '10px', padding: '5px', outline: 'none' }} required /><br />
                         <span id='passwordAlert' style={{ color: "red", display: 'none' }}>Password must have 8 characters!</span>
                     </div>
-                    <div className='uk-margin'>
+                    {/* <div className='uk-margin'>
                         <label htmlFor="profilepic">Upload Your Image</label><br />
                         <input id='profilepic' type='file' style={{ fontSize: '10px', outline: 'none' }} />
                         <button className='uk-button uk-button-default uk-button-small'>Upload</button>
-                    </div>
+                    </div> */}
                     <button className='uk-button uk-button-default uk-button-small' type="submit" style={{ fontSize: '10px' }}>SIGN UP</button>
                 </form>
             </div>

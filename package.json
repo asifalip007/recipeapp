@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production nodemon server.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -15,6 +15,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "mongoose": "^5.9.18",
     "next": "9.4.4",
+    "next-routes": "^1.4.2",
     "nodemon": "^2.0.4",
     "password-hash": "^1.2.2",
     "react": "16.13.1",

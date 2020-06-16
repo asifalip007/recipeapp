@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Component } from 'react';
-import Router  from 'next/router';
 
 
 class Navbar extends Component {
@@ -25,7 +24,6 @@ class Navbar extends Component {
             })
           }
     }
-
     logout = () => {
         sessionStorage.removeItem('userLogged');
         sessionStorage.removeItem("username")
@@ -53,9 +51,9 @@ class Navbar extends Component {
                     </div>
                     <div className='uk-navbar-right'>
                         <ul className='uk-navbar-nav'>
-                            <li><Link href="/"><a style={{ minHeight: '0' }}>Home</a></Link></li>
-                            <li><Link href="/login"><a style={{ minHeight: '0' }}>Sign In</a></Link></li>
-                            <li><Link href="/create"><a style={{ minHeight: '0' }}>Sign Up</a></Link></li>
+                            <li><Link href="/" as='/'><a style={{ minHeight: '0' }}>Home</a></Link></li>
+                            <li><Link href="/login" as='/login'><a style={{ minHeight: '0' }}>Sign In</a></Link></li>
+                            <li><Link href="/create" as='/create'><a style={{ minHeight: '0' }}>Sign Up</a></Link></li>
                         </ul>
                     </div>
                 </nav>

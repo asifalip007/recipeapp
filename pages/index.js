@@ -9,12 +9,12 @@ import Router from 'next/router';
 
 
 
-export async function getServerSideProps () {
+export async function getServerSideProps (context) {
   let data;
-  await axios.get("http://localhost:5000/recipes/").then(res => data = res.data);
+  await axios.get("http://localhost:3000/api/recipes").then(res => data = res.data);
   return {
     props:{
-      recipes: data,
+      recipes: data.data,
     }
   }
 }
@@ -30,16 +30,13 @@ class Index extends Component {
     }
     if(localStorage.getItem('userKeepLogged')==='true'){
       const username = localStorage.getItem('usernameKeep');
-      console.log(username)
       Router.push('/[username]',`/${username}`)
     }else if(sessionStorage.getItem('userLogged')==='true'){
       const username = sessionStorage.getItem('username');
-      console.log(username)
       Router.push('/[username]',`/${username}`)
     }
   }
   render() {
-
     return (
       <Layout>
         <div className='uk-padding uk-container uk-text-center'>

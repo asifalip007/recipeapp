@@ -4,9 +4,9 @@ function CardTemplate(props) {
   return (
     <div>
       <div className='uk-card uk-card-default'>
-        <div className='uk-text-center uk-card-header uk-padding-remove' style={{maxHeight:'140px',overflow:'hidden'}}>
+        {/* <div className='uk-text-center uk-card-header uk-padding-remove' style={{maxHeight:'140px',overflow:'hidden'}}>
           <img className='uk-width-1-1' src='/sandwich.jpeg' alt='sandwich' />
-        </div>
+        </div> */}
         <div className='uk-card-body' style={{ padding: '20px 10px 10px' }}>
           <h4 style={{ marginBottom: '10px' }}><strong>{props.card.foodname}</strong></h4>
           <div className='uk-flex uk-flex-between' style={{ fontSize: '10px' }}>

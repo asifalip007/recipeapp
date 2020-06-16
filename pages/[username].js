@@ -11,11 +11,12 @@ import Unauth from '../components/Unauth';
 export async function getServerSideProps(context) {
   let data;
   const { params } = context
-  await axios.get("http://localhost:5000/recipes/").then(res => data = res.data);
+  await axios.get("http://localhost:3000/api/recipes").then(res => data = res.data);
   return {
     props: {
-      recipes: data,
-      url: params.username
+      recipes: data.data,
+      url: params.username,
+      Param: params
     }
   }
 }
@@ -51,7 +52,6 @@ class LoggedIndex extends Component {
 
   }
   render() {
-    console.log(this.props.recipes)
     const logged = this.state.isLogged === 'true' && this.state.username === this.props.url ? 'block' : 'none'
     const inavlidlogin = this.state.isLogged === 'true' && this.state.username === this.props.url ? 'none' : 'block'
     return (

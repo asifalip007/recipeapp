@@ -5,14 +5,6 @@ class AccordionTemplate extends Component {
     constructor(props){
         super(props);
         this.state = {
-            current:{
-                name: this.props.data.name,
-                username: this.props.data.username,
-                date: this.props.data.date,
-                foodname: this.props.data.foodname,
-                ingredients: this.props.data.ingredients,
-                procedure: this.props.data.procedure
-            },
             update:{
                 name: this.props.data.name,
                 username: this.props.data.username,
@@ -34,7 +26,7 @@ class AccordionTemplate extends Component {
         })
     }
     deleteItem = (id) => {
-        axios.delete(`http://localhost:5000/recipes/${id}`)
+        axios.delete(`http://localhost:3000/api/recipes/${id}`)
             .then(() => {
                 console.log('Recipe Deleted!');
                 this.props.delete(id);
@@ -43,30 +35,30 @@ class AccordionTemplate extends Component {
     }
     updateItem = (id) => (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:5000/recipes/${id}`,this.state.update)
+        // console.log(this.state.update)
+        axios.put(`http://localhost:3000/api/recipes/${id}`,this.state.update)
             .then(() => {
                 console.log('Recipe Updated!');
-                this.setState({
-                    current: this.state.update
-                })
+                this.props.update(id,this.state.update)
             })
             .catch(err => console.log(err))
     }
     render() {
+        // console.log(this.state.update)
         return (
             <li key={this.props.data._id} style={{ marginBottom: '10px' }} >
-                <a className='uk-accordion-title' href="#" style={{ backgroundColor: 'lightgrey', color: 'black', padding: '5px' }}>{this.state.current.foodname}</a>
+                <a className='uk-accordion-title' href="#" style={{ backgroundColor: 'lightgrey', color: 'black', padding: '5px' }}>{this.props.data.foodname}</a>
                 <div className='uk-accordion-content' style={{ marginTop: '10px', marginBottom: '15px' }}>
                     <div className='uk-margin'>
-                        <p className='uk-margin-remove'>Recipe Added: {this.state.current.date}</p>
+                        <p className='uk-margin-remove'>Recipe Added: {this.props.data.date}</p>
                     </div>
                     <div className='uk-margin'>
                         <h4 className='uk-margin-remove'>Ingredients</h4>
-                        <p className='uk-margin-remove'>{this.state.current.ingredients}</p>
+                        <p className='uk-margin-remove'>{this.props.data.ingredients}</p>
                     </div>
                     <div className='uk-margin'>
                         <h4 className='uk-margin-remove'>How To Cook</h4>
-                        <p className='uk-margin-remove'>{this.state.current.procedure}</p>
+                        <p className='uk-margin-remove'>{this.props.data.procedure}</p>
                     </div>
                     <div className='uk-flex uk-flex-left'>
                         <button className='uk-button uk-button-default uk-button-small' style={{ backgroundColor: 'blue', color: "white", border: "1px solid blue" }} uk-toggle={`target: #edit_${this.props.data._id}`} >Edit</button>
@@ -78,15 +70,15 @@ class AccordionTemplate extends Component {
                         <form>
                             <div className='uk-margin uk-child-width-expand'>
                                 <label htmlFor='editfoodname'>Item Name</label> <br />
-                                <input id='foodname' type='text' value={this.state.update.foodname} onChange={this.onChange} />
+                                <input id='foodname' type='text' defaultValue={this.props.data.foodname} onChange={this.onChange} />
                             </div>
                             <div  className='uk-margin uk-child-width-expand'>
                                 <label htmlFor='editingredients'>Ingredients</label> <br />
-                                <input id='ingredients' type='text' value={this.state.update.ingredients} onChange={this.onChange}/>
+                                <input id='ingredients' type='text' defaultValue={this.props.data.ingredients} onChange={this.onChange}/>
                             </div>
                             <div  className='uk-margin uk-child-width-expand'>
                                 <label htmlFor='editprocedure'>How To Cook</label> <br />
-                                <textarea id='procedure' style={{ height: '100px' }} type='text' value={this.state.update.procedure} onChange={this.onChange}/>
+                                <textarea id='procedure' style={{ height: '100px' }} type='text' defaultValue={this.props.data.procedure} onChange={this.onChange}/>
                             </div>
                             <button type="button" className='uk-button uk-button-default uk-button-small uk-modal-close' onClick={this.updateItem(this.props.data._id)}>Update</button>
                         </form>

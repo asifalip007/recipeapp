@@ -5,8 +5,8 @@ class AddForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: this.props.data.name,
-            username: this.props.data.username,
+            name: this.props.data[0].name,
+            username: this.props.data[0].username,
             date: '',
             foodname: '',
             ingredients: '',
@@ -32,7 +32,8 @@ class AddForm extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/recipes/add/', this.state)
+        // console.log(this.state)
+        axios.post('http://localhost:3000/api/recipes/add', this.state)
         .then(res => {
             console.log(res.data);
             this.setState({

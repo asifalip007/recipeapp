@@ -23,7 +23,7 @@ class SignIn extends Component {
         e.preventDefault();
         let loginFlag = false;
         const credentials = this.props.users.map((user) => { return { username: user.username, password: user.password } });
-        console.log(credentials)
+        // console.log(credentials)
         credentials.forEach(credential => {
             if (credential.username === this.state.username && passwordHash.verify(this.state.password,credential.password)) {
                 loginFlag = true
