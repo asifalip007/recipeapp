@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Router from 'next/router';
 import { Component } from 'react';
+import passwordHash from 'password-hash';
 
 class SignIn extends Component {
     constructor(props) {
@@ -21,23 +22,32 @@ class SignIn extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         let loginFlag = false;
-        console.log(this.state.username, this.state.password)
         const credentials = this.props.users.map((user) => { return { username: user.username, password: user.password } });
         console.log(credentials)
         credentials.forEach(credential => {
-            if (credential.username === this.state.username && credential.password === this.state.password) {
+            if (credential.username === this.state.username && passwordHash.verify(this.state.password,credential.password)) {
                 loginFlag = true
             }
         })
         if (loginFlag) {
-            Router.push(`/profile/${this.state.username}`)
+            Router.push('/[username]/profile', `/${this.state.username}/profile`)
             this.setState({
                 username: '',
                 password: ''
             })
-            document.getElementById("loginAlert").style.display = 'none'
+            document.getElementById("loginAlert").style.display = 'none';
+            if (document.getElementById('keeplogged').checked) {
+                localStorage.setItem("userKeepLogged", true);
+                localStorage.setItem("usernameKeep", this.state.username)
+            } else {
+                sessionStorage.setItem("userLogged", true);
+                sessionStorage.setItem("username", this.state.username)
+            }
         } else {
             document.getElementById("loginAlert").style.display = 'block'
+            this.setState({
+                password:''
+            })
         }
     }
     render() {

@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
 import axios from 'axios';
 
 import Layout from '../components/Layout';
 import CardTemplate from '../components/CardTemplate';
-import Data from '../Data/data.json';
 import NoRecipe from '../components/NoRecipe';
+import Router from 'next/router';
 
 
 
@@ -15,7 +14,7 @@ export async function getServerSideProps () {
   await axios.get("http://localhost:5000/recipes/").then(res => data = res.data);
   return {
     props:{
-      recipes: data
+      recipes: data,
     }
   }
 }
@@ -29,9 +28,18 @@ class Index extends Component {
       document.getElementById('noRecipe').style.display = 'block';
       document.getElementById('recipeList').style.display = 'none';
     }
+    if(localStorage.getItem('userKeepLogged')==='true'){
+      const username = localStorage.getItem('usernameKeep');
+      console.log(username)
+      Router.push('/[username]',`/${username}`)
+    }else if(sessionStorage.getItem('userLogged')==='true'){
+      const username = sessionStorage.getItem('username');
+      console.log(username)
+      Router.push('/[username]',`/${username}`)
+    }
   }
   render() {
-    console.log(this.props.recipes)
+
     return (
       <Layout>
         <div className='uk-padding uk-container uk-text-center'>

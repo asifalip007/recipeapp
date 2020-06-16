@@ -5,8 +5,8 @@ class AddForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: this.props.data[0].name,
-            username: this.props.data[0].username,
+            name: this.props.data.name,
+            username: this.props.data.username,
             date: '',
             foodname: '',
             ingredients: '',
@@ -31,6 +31,7 @@ class AddForm extends Component {
         })
     }
     onSubmit = (e) => {
+        e.preventDefault();
         axios.post('http://localhost:5000/recipes/add/', this.state)
         .then(res => {
             console.log(res.data);
@@ -39,6 +40,7 @@ class AddForm extends Component {
                 ingredients: '',
                 procedure: ''
             })
+            this.props.add(this.state.username);
         })
         .catch(err => console.log(`Error: ${err}`))
     }
@@ -47,15 +49,15 @@ class AddForm extends Component {
             <form onSubmit={this.onSubmit}>
                 <div className='uk-margin uk-child-width-expand'>
                     <label htmlFor="foodname">Enter Item Name</label><br />
-                    <input id='foodname' type='text' onChange={this.onChange} />
+                    <input id='foodname' type='text' value={this.state.foodname} onChange={this.onChange} />
                 </div>
                 <div className='uk-margin uk-child-width-expand'>
                     <label htmlFor="ingredients">Enter Ingredients (Use comma seperation for readability)</label><br />
-                    <input id='ingredients' type='text' onChange={this.onChange} />
+                    <input id='ingredients' type='text' value={this.state.ingredients} onChange={this.onChange} />
                 </div>
                 <div className='uk-margin uk-child-width-expand'>
                     <label htmlFor="procedure">Cooking Procedure</label><br />
-                    <textarea id='procedure' style={{ height: '100px' }} onChange={this.onChange} />
+                    <textarea id='procedure' style={{ height: '100px' }} value={this.state.procedure} onChange={this.onChange} />
                 </div>
                 <button className='uk-button uk-button-default uk-button-small uk-align-right'>Add Recipe</button>
             </form>

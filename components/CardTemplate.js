@@ -24,7 +24,7 @@ function CardTemplate(props) {
           <button className='uk-button uk-button-default uk-button-small' style={{ outline: 'none' }} uk-toggle={`target: #_${props.card._id}`} >Get Recipe</button>
         </div>
       </div>
-      <ModalTemplate card = {props.card} />
+      <ModalTemplate card = {props.card} url={props.url} />
     </div>
   )
 }

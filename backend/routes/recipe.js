@@ -2,7 +2,13 @@ const router = require('express').Router();
 let Recipe =  require('../models/recipes.js');
 
 router.route('/').get((req,res) => {
-    Recipe.find()
+    Recipe.find().sort({"_id":-1})
+    .then(recipes => res.json(recipes))
+    .catch(err => res.status(400).json(`Error: ${err}`))
+})
+
+router.route('/:username').get((req,res) => {
+    Recipe.find({username: req.params.username}).sort({"_id":-1})
     .then(recipes => res.json(recipes))
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
