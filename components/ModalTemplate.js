@@ -7,7 +7,7 @@ function ModalTemplate(props) {
     }
     return (
         <div id={`_${props.card._id}`} uk-modal='true'>
-            <div className='uk-modal-dialog uk-modal-body uk-padding-remove uk-margin-auto-vertical uk-width-2-3' >
+            <div className='uk-modal-dialog uk-modal-body uk-padding-remove uk-margin-auto-vertical uk-width-2-3@s uk-width-1-1' >
                 <button className='uk-modal-close-default' uk-close="true"></button>
                 {/* <div style={{maxHeight:'300px', overflow:'hidden'}}>
                     <img className='uk-width-1-1' src='/sandwich.jpeg' alt='sandwich' />

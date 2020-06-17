@@ -101,12 +101,13 @@ class Profile extends Component {
                 </div>
                 <div style={{ display: logged }}>
                     <Layout>
-                        <div className='uk-padding uk-width-2-3' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+                        <div className='uk-padding uk-width-2-3@s uk-width-1-1' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                             <div style={{ height: '190px', border: '0.5px solid black', position: 'relative', borderRadius: '20px' }}>
-                                <div className='uk-text-center' style={{ position: 'absolute', left: '-50px', top: '20px', backgroundColor: 'white' }}>
+                                {/* <div className='uk-text-center' style={{ position: 'absolute', left: '-50px', top: '20px', backgroundColor: 'white' }}>
                                     <img id='userprofile' className='uk-border-circle' src='/user.png' style={{ width: '150px', height: '150px', border: '1px solid #e5e5e5', padding: '2px' }} />
-                                </div>
-                                <div style={{ position: 'absolute', left: "120px", top: '50px' }}>
+                                </div> */}
+                                {/* style={{ position: 'absolute', left: "120px", top: '50px' }} */}
+                                <div >
                                     <h1>Hi,{this.props.userData[0].name}</h1>
                                     <p className='uk-margin-remove'>Add More Recipes Into Your Fabulous List</p>
                                     <p className='uk-margin-remove'>Recipes Added: {this.state.recipeData.length}</p>
