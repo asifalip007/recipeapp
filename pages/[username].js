@@ -11,7 +11,7 @@ import Unauth from '../components/Unauth';
 export async function getServerSideProps(context) {
   let data;
   const { params } = context
-  await axios.get("http://localhost:3000/api/recipes").then(res => data = res.data);
+  await axios.get(`http://localhost:${process.env.PORT}/api/recipes`).then(res => data = res.data);
   return {
     props: {
       recipes: data.data,

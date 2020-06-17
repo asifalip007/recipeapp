@@ -33,7 +33,7 @@ class AddForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         // console.log(this.state)
-        axios.post('http://localhost:3000/api/recipes/add', this.state)
+        axios.post(`http://localhost:${process.env.PORT}/api/recipes/add`, this.state)
         .then(res => {
             console.log(res.data);
             this.setState({

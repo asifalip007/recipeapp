@@ -26,7 +26,7 @@ class AccordionTemplate extends Component {
         })
     }
     deleteItem = (id) => {
-        axios.delete(`http://localhost:3000/api/recipes/${id}`)
+        axios.delete(`http://localhost:${process.env.PORT}/api/recipes/${id}`)
             .then(() => {
                 console.log('Recipe Deleted!');
                 this.props.delete(id);
@@ -36,7 +36,7 @@ class AccordionTemplate extends Component {
     updateItem = (id) => (e) => {
         e.preventDefault();
         // console.log(this.state.update)
-        axios.put(`http://localhost:3000/api/recipes/${id}`,this.state.update)
+        axios.put(`http://localhost:${process.env.PORT}/api/recipes/${id}`,this.state.update)
             .then(() => {
                 console.log('Recipe Updated!');
                 this.props.update(id,this.state.update)

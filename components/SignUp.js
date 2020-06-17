@@ -33,7 +33,7 @@ class SignUp extends Component {
                 username: this.state.username,
                 password: hashedPassword
             }
-            axios.post('http://localhost:3000/api/users/add', formData)
+            axios.post(`http://localhost:${process.env.PORT}/api/users/add`, formData)
                 .then(res => {
                     console.log(res.data)
                     this.setState({

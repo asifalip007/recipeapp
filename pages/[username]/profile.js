@@ -9,8 +9,8 @@ import Unauth from '../../components/Unauth';
 export async function getServerSideProps(context) {
     let rdata, udata, tudata;
     const { params } = context;
-    await axios.get(`http://localhost:3000/api/recipes/${params.username}`).then(res => rdata = res.data);
-    await axios.get(`http://localhost:3000/api/users/${params.username}`).then(res => udata = res.data);
+    await axios.get(`http://localhost:${process.env.PORT}/api/recipes/${params.username}`).then(res => rdata = res.data);
+    await axios.get(`http://localhost:${process.env.PORT}/api/users/${params.username}`).then(res => udata = res.data);
     return {
         props: {
             userData: udata.data,
@@ -68,7 +68,7 @@ class Profile extends Component {
     }
     recipeAdd = (username) => {
         let update;
-        axios.get(`http://localhost:3000/api/recipes/${username}`).then(res => {
+        axios.get(`http://localhost:${process.env.PORT}/api/recipes/${username}`).then(res => {
             update = res.data.data
             document.getElementById('recipes').classList = 'uk-active';
             document.getElementById('recipesanchor').setAttribute('aria-expanded', true);
