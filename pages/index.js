@@ -11,7 +11,7 @@ import Router from 'next/router';
 
 export async function getServerSideProps (context) {
   let data;
-  await axios.get(`http://foodtales.herukoapp.com/api/recipes`).then(res => data = res.data);
+  await axios.get(`http://localhost:${process.env.PORT}/api/recipes`).then(res => data = res.data);
   return {
     props:{
       recipes: data.data,
