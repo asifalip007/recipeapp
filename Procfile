@@ -1,1 +1,1 @@
-web: nodemon server.js -p $PORT
+web: npm run start
