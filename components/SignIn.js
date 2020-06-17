@@ -51,7 +51,7 @@ class SignIn extends Component {
     }
     render() {
         return (
-            <div className='uk-padding uk-container uk-margin-top uk-width-4-5@m uk-width-2-3 uk-border-rounded' style={{ border: '.5px solid black' }}>
+            <div className='uk-padding uk-container uk-margin-top uk-width-2-5 uk-width-4-5@s uk-border-rounded' style={{ border: '.5px solid black' }}>
                 <h3 className='uk-margin'>Sign In To Add Recipes</h3>
                 <p className='uk-margin-remove' style={{ marginTop: '20px' }}>Not A User? <Link href='/create'><a style={{ textDecoration: 'none' }}>Sign Up</a></Link> To Create Account</p>
                 <span id='loginAlert' style={{ display: 'none', color: 'red' }}>Invalid Username or Password</span>
