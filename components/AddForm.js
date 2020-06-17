@@ -32,8 +32,10 @@ class AddForm extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state)
-        axios.post(`http://localhost:${process.env.PORT}/api/recipes/add`, this.state)
+        // http://localhost:${port}/api/recipes/add should be used when run locally.
+        // (port : 3000 or any other port declared in env)
+        // Current Url was used strictly for deploying the app on heroku
+        axios.post(`http://foodtales.herokuapp.com/api/recipes/add`, this.state) 
         .then(res => {
             console.log(res.data);
             this.setState({

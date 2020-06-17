@@ -11,6 +11,8 @@ import Unauth from '../components/Unauth';
 export async function getServerSideProps(context) {
   let data;
   const { params } = context
+  // process.env.PORT is the available port.
+  // This value can be hard coded as 3000 (usual value) when building next js app.
   await axios.get(`http://localhost:${process.env.PORT}/api/recipes`).then(res => data = res.data);
   return {
     props: {
@@ -38,12 +40,12 @@ class LoggedIndex extends Component {
       document.getElementById('noRecipe').style.display = 'block';
       document.getElementById('recipeList').style.display = 'none';
     }
-    if(sessionStorage.getItem('userLogged') === 'true'){
+    if (sessionStorage.getItem('userLogged') === 'true') {
       this.setState({
         isLogged: sessionStorage.getItem('userLogged'),
         username: sessionStorage.getItem('username')
       })
-    }else if(localStorage.getItem('userKeepLogged') === 'true'){
+    } else if (localStorage.getItem('userKeepLogged') === 'true') {
       this.setState({
         isLogged: localStorage.getItem('userKeepLogged'),
         username: localStorage.getItem('usernameKeep')
@@ -56,25 +58,25 @@ class LoggedIndex extends Component {
     const inavlidlogin = this.state.isLogged === 'true' && this.state.username === this.props.url ? 'none' : 'block'
     return (
       <>
-      <div style={{display:inavlidlogin}}>
-        <Unauth />
-      </div>
-      <div style={{display:logged}}>
-        <Layout>
-          <div className='uk-padding uk-container uk-text-center'>
-            <p id='loginAlert' className='uk-margin-remove'>Food Tales is a collection of delicious food recipes.</p>
-            <h4 className='uk-margin-remove'>Happy Cooking!</h4>
-          </div>
-          <NoRecipe />
-          <div id='recipeList' >
-            <div className='uk-grid-medium uk-child-width-1-3@s uk-padding' uk-grid='true'>
-              {this.props.recipes.map(recipe => {
-                return <CardTemplate card={recipe} url={this.props.url} />
-              })}
+        <div style={{ display: inavlidlogin }}>
+          <Unauth />
+        </div>
+        <div style={{ display: logged }}>
+          <Layout>
+            <div className='uk-padding uk-container uk-text-center'>
+              <p id='loginAlert' className='uk-margin-remove'>Food Tales is a collection of delicious food recipes.</p>
+              <h4 className='uk-margin-remove'>Happy Cooking!</h4>
             </div>
-          </div>
-        </Layout>
-      </div>
+            <NoRecipe />
+            <div id='recipeList' >
+              <div className='uk-grid-medium uk-child-width-1-3@s uk-padding' uk-grid='true'>
+                {this.props.recipes.map(recipe => {
+                  return <CardTemplate card={recipe} url={this.props.url} />
+                })}
+              </div>
+            </div>
+          </Layout>
+        </div>
       </>
     )
   }

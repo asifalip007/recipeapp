@@ -11,6 +11,8 @@ import Router from 'next/router';
 
 export async function getServerSideProps (context) {
   let data;
+  // process.env.PORT is the available port.
+  // This value can be hard coded as 3000 (usual value) when building next js app.
   await axios.get(`http://localhost:${process.env.PORT}/api/recipes`).then(res => data = res.data);
   return {
     props:{

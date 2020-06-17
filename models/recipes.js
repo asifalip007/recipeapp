@@ -1,6 +1,9 @@
+// setting up databse models
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// defines schema for each entry
 const recipeSchema = new Schema ({
     username : {
         type: String,
@@ -34,4 +37,5 @@ const recipeSchema = new Schema ({
     timestamps: true
 });
 
+// exports either existing modesl or a new created model.
 module.exports = mongoose.models.Recipe || mongoose.model('Recipe', recipeSchema);

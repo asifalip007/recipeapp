@@ -26,7 +26,10 @@ class AccordionTemplate extends Component {
         })
     }
     deleteItem = (id) => {
-        axios.delete(`http://localhost:${process.env.PORT}/api/recipes/${id}`)
+        // http://localhost:${port}/api/recipes/${id} should be used when run locally.
+        // (port = 3000 or any other env variable)
+        // Current Url was used strictly for deploying the app on heroku
+        axios.delete(`http://foodtales.herokuapp.com/api/recipes/${id}`) 
             .then(() => {
                 console.log('Recipe Deleted!');
                 this.props.delete(id);
@@ -35,8 +38,10 @@ class AccordionTemplate extends Component {
     }
     updateItem = (id) => (e) => {
         e.preventDefault();
-        // console.log(this.state.update)
-        axios.put(`http://localhost:${process.env.PORT}/api/recipes/${id}`,this.state.update)
+        // http://localhost:${port}/api/recipes/${id} should be used when run locally.
+        // (port = 3000 or any other env variable)
+        // Current Url was used strictly for deploying the app on heroku
+        axios.put(`http://foodtales.herokuapp.com/api/recipes/${id}`,this.state.update) 
             .then(() => {
                 console.log('Recipe Updated!');
                 this.props.update(id,this.state.update)
@@ -44,7 +49,6 @@ class AccordionTemplate extends Component {
             .catch(err => console.log(err))
     }
     render() {
-        // console.log(this.state.update)
         return (
             <li key={this.props.data._id} style={{ marginBottom: '10px' }} >
                 <a className='uk-accordion-title' href="#" style={{ backgroundColor: 'lightgrey', color: 'black', padding: '5px' }}>{this.props.data.foodname}</a>

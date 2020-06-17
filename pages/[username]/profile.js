@@ -9,6 +9,8 @@ import Unauth from '../../components/Unauth';
 export async function getServerSideProps(context) {
     let rdata, udata, tudata;
     const { params } = context;
+    // process.env.PORT is the available port.
+    // This value can be hard coded as 3000 (usual value) when building next js app.
     await axios.get(`http://localhost:${process.env.PORT}/api/recipes/${params.username}`).then(res => rdata = res.data);
     await axios.get(`http://localhost:${process.env.PORT}/api/users/${params.username}`).then(res => udata = res.data);
     return {
@@ -46,40 +48,44 @@ class Profile extends Component {
         }
     }
     recipeDelete = (id) => {
-        const filtered = this.state.recipeData.filter(item => item._id!==id)
+        const filtered = this.state.recipeData.filter(item => item._id !== id)
         this.setState({
-            recipeData:filtered
+            recipeData: filtered
         })
     }
-    recipeUpdate = (id,update) => {
+    recipeUpdate = (id, update) => {
         const updated = this.state.recipeData.map((item) => {
-            if(item._id===id){
+            if (item._id === id) {
                 item.foodname = update.foodname
                 item.ingredients = update.ingredients
                 item.procedure = update.procedure
                 return item
-            }else{
+            } else {
                 return item
             }
         })
         this.setState({
-            recipeData:updated
+            recipeData: updated
         })
     }
     recipeAdd = (username) => {
         let update;
-        axios.get(`http://localhost:${process.env.PORT}/api/recipes/${username}`).then(res => {
-            update = res.data.data
-            document.getElementById('recipes').classList = 'uk-active';
-            document.getElementById('recipesanchor').setAttribute('aria-expanded', true);
-            document.getElementById('addrecipesanchor').setAttribute('aria-expanded', false);
-            document.getElementById('addrecipes').classList = '';
-            document.getElementById('recipes-accord').classList = 'uk-active';
-            document.getElementById('addrecipes-accord').classList = '';
-            this.setState({
-                recipeData: update
+        // http://localhost:${process.env.PORT}/api/recipes/${username} should be used when run locally.
+        // (port: 3000 or any other variable given in env file)
+        // Current Url was used strictly for deploying the app on heroku
+        axios.get(`http://foodtales.herokuapp.com/api/recipes/${username}`) 
+            .then(res => {
+                update = res.data.data
+                document.getElementById('recipes').classList = 'uk-active';
+                document.getElementById('recipesanchor').setAttribute('aria-expanded', true);
+                document.getElementById('addrecipesanchor').setAttribute('aria-expanded', false);
+                document.getElementById('addrecipes').classList = '';
+                document.getElementById('recipes-accord').classList = 'uk-active';
+                document.getElementById('addrecipes-accord').classList = '';
+                this.setState({
+                    recipeData: update
+                })
             })
-        })
             .catch(err => console.log(err))
 
     }

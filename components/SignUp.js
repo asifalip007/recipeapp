@@ -33,7 +33,10 @@ class SignUp extends Component {
                 username: this.state.username,
                 password: hashedPassword
             }
-            axios.post(`http://localhost:${process.env.PORT}/api/users/add`, formData)
+            // http://localhost:${port}/api/users/add should be used when locally run
+            // (port = 3000 or any other env variable)
+            // Current Url was used strictly for deploying the app on heroku
+            axios.post(`http://foodtales.herokuapp.com/api/users/add`, formData)
                 .then(res => {
                     console.log(res.data)
                     this.setState({
