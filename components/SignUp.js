@@ -51,7 +51,7 @@ class SignUp extends Component {
     }
     render() {
         return (
-            <div className='uk-padding uk-container uk-margin-top uk-width-4-5@m uk-width-2-3 uk-border-rounded' style={{ border: '.5px solid black' }}>
+            <div className='uk-padding uk-container uk-margin-top uk-width-4-5 uk-width-2-5@s uk-border-rounded' style={{ border: '.5px solid black' }}>
                 <h3 className='uk-margin'>Create Your Account</h3>
                 <p className='uk-margin'>Already Have An Account? <Link href='/login'><a style={{ textDecoration: 'none' }}>Sign In</a></Link> To Add Recipes</p>
                 <form id='signupForm' onSubmit={this.onSubmit} style={{ fontSize: '10px' }}>

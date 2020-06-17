@@ -107,7 +107,7 @@ class Profile extends Component {
                                     <img id='userprofile' className='uk-border-circle' src='/user.png' style={{ width: '150px', height: '150px', border: '1px solid #e5e5e5', padding: '2px' }} />
                                 </div> */}
                                 {/* style={{ position: 'absolute', left: "120px", top: '50px' }} */}
-                                <div >
+                                <div className='uk-padding' >
                                     <h1>Hi,{this.props.userData[0].name}</h1>
                                     <p className='uk-margin-remove'>Add More Recipes Into Your Fabulous List</p>
                                     <p className='uk-margin-remove'>Recipes Added: {this.state.recipeData.length}</p>
